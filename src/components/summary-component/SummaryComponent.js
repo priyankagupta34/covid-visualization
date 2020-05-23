@@ -82,7 +82,7 @@ export default class SummaryComponent extends Component {
 
         /* Display rectangle bars here */
         bars.transition(transition)
-            .delay(function (d, i) { return 50 * i; })
+            .delay(function (d, i) { return 30 * i; })
             .attr('x', (d, i) => xScale(i))
             .attr('y', (d, i) => yScale(d[type]))
             .attr('width', 10)

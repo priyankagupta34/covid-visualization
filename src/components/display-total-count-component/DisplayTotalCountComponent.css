@@ -1,20 +1,35 @@
-.grdCon_2{
+.grdCon_2 {
     width: 500px;
 }
-.grovtd_67{
+
+.grovtd_67 {
     background: #333232;
     padding: 20px;
     border-radius: 6px;
     box-shadow: inset 0 0 8px #ffffffc7;
     color: azure;
+    transition: 0.2s;
 }
 
-.grovtd_67 small{
+.grovtd_67 small {
     color: #ffe5b5;
     font-weight: 700;
     letter-spacing: 0.6px;
 }
 
-.grovtd_67 div{
+.grovtd_67 div {
     font-size: larger;
+}
+
+.grovtd_67:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+    box-shadow: inset 0 0 10px #ffffffc7;
+}
+
+
+.cancelOverflow {
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: inset 0 0 8px #ffffffc7;
 }

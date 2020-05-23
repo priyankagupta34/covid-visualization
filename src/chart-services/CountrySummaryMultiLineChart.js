@@ -45,7 +45,7 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
 
     d3.selectAll(`#${id} > *`).remove();
 
-    
+
 
     const height = 300;
     const width = 1300;
@@ -54,8 +54,8 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
         .attr('width', width)
         .attr('height', height);
 
-        const transition = d3.transition()
-            .duration(500);
+    const transition = d3.transition()
+        .duration(500);
 
     // const tooltip = d3.select(`#${id}`)
     //     .append("div")
@@ -131,9 +131,9 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
                 .attr('fill', 'none')
                 .attr("stroke", "antiquewhite")
                 .attr("stroke-width", 3)
-                
+
                 .attr("d", line)
-                
+
         }
 
         /* Curve of country 2 */

@@ -3,7 +3,8 @@ export const CovidServices = {
     todaysSummary,
     countryWiseData,
     totalCount,
-    listAllCountries
+    listAllCountries,
+    listAllLatLongs
 }
 
 const axios = require('axios');
@@ -28,4 +29,8 @@ function totalCount() {
 
 function listAllCountries() {
     return axios.get(`${server}countries`);
+}
+
+function listAllLatLongs(){
+    return axios.get('countrycode-latlong-array.json');
 }

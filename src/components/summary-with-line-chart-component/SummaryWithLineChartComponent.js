@@ -87,7 +87,7 @@ export default class SummaryWithLineChartComponent extends Component {
         CovidServices.countryWiseData(this.state.countryb),
         CovidServices.countryWiseData(this.state.countryc)])
             .then((result) => {
-                console.log('ioioiio', result)
+                // console.log('ioioiio', result)
                 let countrya = [];
                 let countryb = [];
                 let countryc = [];

@@ -5,6 +5,7 @@ import { CovidServices } from './services/CovidServices'
 import React, { Component } from 'react'
 import HeaderComponent from './components/header-component/HeaderComponent';
 import DisplayTotalCountComponent from './components/display-total-count-component/DisplayTotalCountComponent';
+import MapDisplayComponent from './components/map-display-component/MapDisplayComponent';
 
 export default class App extends Component {
 
@@ -57,6 +58,7 @@ export default class App extends Component {
         <HeaderComponent loggedCountryName={loggedCountryName} />
         <DisplayTotalCountComponent totals={totals} />
         <SummaryComponent summaryDataCountries={summaryDataCountries} loggedCountryName={loggedCountryName} />
+        <MapDisplayComponent summaryDataCountries={summaryDataCountries}/>
         <SummaryWithLineChartComponent
           summaryDataCountries={summaryDataCountries}
           loggedCountryName={loggedCountryName}

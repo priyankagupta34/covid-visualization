@@ -20,42 +20,54 @@ export default class DisplayTotalCountComponent extends Component {
                 <div className="flexCentered">
                     <Grid container style={{ width: 700 }} spacing={2}>
                         <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>New Confirmed</div>
-                                <small>{totals.NewConfirmed}</small>
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67">
+                                    <div>New Confirmed</div>
+                                    <small>{totals.NewConfirmed}</small>
+                                </div>
                             </div>
                         </Grid>
                         <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>New Deaths</div>
-                                <small>{totals.NewDeaths}</small>
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67">
+                                    <div>New Deaths</div>
+                                    <small>{totals.NewDeaths}</small>
+                                </div>
                             </div>
                         </Grid>
                         <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>New Recovered</div>
-                                <small>{totals.NewRecovered}</small>
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67">
+                                    <div>New Recovered</div>
+                                    <small>{totals.NewRecovered}</small>
+                                </div>
                             </div>
                         </Grid>
                     </Grid>
-                </div><div className="flexCentered" style={{marginTop: 15}}>
+                </div><div className="flexCentered " style={{ marginTop: 15 }}>
                     <Grid container style={{ width: 700 }} spacing={2}>
-                        <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>Total Confirmed</div>
-                                <small>{totals.TotalConfirmed}</small>
+                        <Grid item xs={4} className="centered ">
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67 ">
+                                    <div>Total Confirmed</div>
+                                    <small>{totals.TotalConfirmed}</small>
+                                </div>
                             </div>
                         </Grid>
                         <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>Total Deaths</div>
-                                <small>{totals.TotalDeaths}</small>
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67">
+                                    <div>Total Deaths</div>
+                                    <small>{totals.TotalDeaths}</small>
+                                </div>
                             </div>
                         </Grid>
                         <Grid item xs={4} className="centered">
-                            <div className="grovtd_67">
-                                <div>Total Recovered</div>
-                                <small>{totals.TotalRecovered}</small>
+                            <div className="cancelOverflow">
+                                <div className="grovtd_67">
+                                    <div>Total Recovered</div>
+                                    <small>{totals.TotalRecovered}</small>
+                                </div>
                             </div>
                         </Grid>
                     </Grid>
