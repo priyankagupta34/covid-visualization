@@ -1,0 +1,24 @@
+svg {
+    overflow: visible;
+}
+
+
+
+.tx_mn {
+    font-size: small;
+    font-weight: 500;
+}
+
+.nd_sm {
+    padding: 35px 0;
+    text-align: center;
+    background: #504d4d;
+    padding-bottom: 140px;
+    box-shadow: inset 0 0 9px white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#cov_1{
+    margin-top: 30px;
+}

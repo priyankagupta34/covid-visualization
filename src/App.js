@@ -1,26 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SummaryComponent from './components/summary-component/SummaryComponent';
+import SummaryWithLineChartComponent from './components/summary-with-line-chart-component/SummaryWithLineChartComponent';
+import { CovidServices } from './services/CovidServices'
+import React, { Component } from 'react'
+import HeaderComponent from './components/header-component/HeaderComponent';
+import DisplayTotalCountComponent from './components/display-total-count-component/DisplayTotalCountComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      summaryDataCountries: [],
+      loggedCountryName: '',
+      totals: '',
+      countryList: []
+    }
+  }
+
+  componentDidMount() {
+    CovidServices.countryName()
+      .then((result) => {
+        this.setState({
+          ...this.state,
+          loggedCountryName: result.data.country_name
+        })
+      }).catch((err) => {
+
+      });
+    CovidServices.todaysSummary()
+      .then((result) => {
+        this.setState({
+          ...this.state,
+          summaryDataCountries: result.data.Countries,
+          totals: result.data.Global,
+        })
+      }).catch((err) => {
+
+      });
+    CovidServices.listAllCountries()
+      .then((result) => {
+        this.setState({
+          ...this.state,
+          countryList: result.data
+        })
+      }).catch((err) => {
+
+      });
+
+  }
+
+  render() {
+    const { summaryDataCountries, loggedCountryName, totals, countryList } = this.state;
+    return (
+      <div className="art_ap">
+        <HeaderComponent loggedCountryName={loggedCountryName} />
+        <DisplayTotalCountComponent totals={totals} />
+        <SummaryComponent summaryDataCountries={summaryDataCountries} loggedCountryName={loggedCountryName} />
+        <SummaryWithLineChartComponent
+          summaryDataCountries={summaryDataCountries}
+          loggedCountryName={loggedCountryName}
+          countryList={countryList}
+        />
+      </div>
+    )
+  }
 }
 
-export default App;

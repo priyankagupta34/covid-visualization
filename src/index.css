@@ -11,3 +11,63 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.righted {
+  text-align: right;
+}
+
+.centered {
+  text-align: center;
+}
+.flexCentered{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mie_title {
+  color: white;
+  font-weight: 100;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.mie_title::after {
+  content: '';
+  background-color: #dcd9d473;
+  display: block;
+  height: 1px;
+  width: 260px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 7px;
+}
+
+
+.tooltip, .tooltip_1 {
+  min-width: 117px;
+  min-height: 100px;
+  background: #f0f8ffd1;
+  border-radius: 5px;
+  padding: 7px;
+  font-size: small;
+  font-weight: 500;
+  transition: 0.2s;
+  line-height: 20px;
+  box-shadow: 0 0 6px #4169e159;
+}
+
+.tooltip_1{
+  min-height: 20px;
+}
+
+
+.MuiOutlinedInput-notchedOutline{
+  border-color: aliceblue;
+}

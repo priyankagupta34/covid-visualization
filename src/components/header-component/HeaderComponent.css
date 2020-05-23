@@ -1,0 +1,37 @@
+.hd_c {
+    height: 80px;
+    position: sticky;
+    top: 0;
+    background: black;
+    margin-bottom: 24px;
+}
+
+.titl {
+    color: white;
+    font-size: xx-large;
+    margin-top: 14px;
+    font-weight: 100;
+}
+
+.titl::after,
+.mn_sb::after {
+    content: '';
+    background-color: #dcd9d473;
+    display: block;
+    height: 1px;
+    width: 260px;
+    margin-top: 5px;
+}
+
+.mn_sb::after {
+    width: 123px;
+}
+
+.su_tle {
+    color: lightblue;
+    font-size: small;
+}
+
+.mn_sb {
+    padding-top: 18px;
+}
