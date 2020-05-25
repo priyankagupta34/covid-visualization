@@ -11,7 +11,7 @@ const axios = require('axios');
 const server = 'https://api.covid19api.com/';
 
 function countryName() {
-    return axios.get(`https://api.ipdata.co/?api-key=test`);
+    return axios.get(`https://api.ipdata.co/?api-key=e618a48e0a90e21b3a11b322b03b4ad0109844b2b9701b103c7d06af`);
 }
 
 function todaysSummary() {
