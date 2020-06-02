@@ -1,9 +1,11 @@
 import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
+import { CountrySummaryMultiLineChart } from '../../chart-services/CountrySummaryMultiLineChart';
 import { CountrySummarySingleLineChart } from '../../chart-services/CountrySummarySingleLineChart';
+import { CountryEveryEventSummaryMultiLineChart } from '../../chart-services/CountryEveryEventSummaryMultiLineChart';
 import { CovidServices } from '../../services/CovidServices';
 import './SummaryWithLineChartComponent.css';
-import { CountrySummaryMultiLineChart } from '../../chart-services/CountrySummaryMultiLineChart';
+import { CountrySummaryPieChart } from '../../chart-services/CountrySummaryPieChart';
 
 export default class SummaryWithLineChartComponent extends Component {
 
@@ -14,7 +16,7 @@ export default class SummaryWithLineChartComponent extends Component {
             countryb: '',
             countryc: '',
             countryList: [],
-            eventType: 'Confirmed',
+            eventType: 'Active',
             showLoader: ''
         }
     }
@@ -53,18 +55,20 @@ export default class SummaryWithLineChartComponent extends Component {
     countryWiseCompleteSummary(country) {
         CovidServices.countryWiseData(country)
             .then((result) => {
-                setTimeout(() => {
-                    CountrySummarySingleLineChart.singleLineChart(result.data, 'Recovered', 'cov_2', this.props.loggedCountryName)
-                }, 0);
-                setTimeout(() => {
-                    CountrySummarySingleLineChart.singleLineChart(result.data, 'Active', 'cov_3', this.props.loggedCountryName)
-                }, 0);
-                setTimeout(() => {
-                    CountrySummarySingleLineChart.singleLineChart(result.data, 'Deaths', 'cov_4', this.props.loggedCountryName)
-                }, 0);
-                setTimeout(() => {
-                    CountrySummarySingleLineChart.singleLineChart(result.data, 'Confirmed', 'cov_5', this.props.loggedCountryName)
-                }, 0);
+                CountryEveryEventSummaryMultiLineChart.vividMultiLineChart('cov_2', result.data);
+                CountrySummaryPieChart.vividPieChart(result.data[result.data.length-1],CovidServices.getCountryPopulation(this.props.loggedCountryCode),'cov_3');
+                // setTimeout(() => {
+                //     CountrySummarySingleLineChart.singleLineChart(result.data, 'Recovered', 'cov_2', this.props.loggedCountryName)
+                // }, 0);
+                // setTimeout(() => {
+                //     CountrySummarySingleLineChart.singleLineChart(result.data, 'Active', 'cov_3', this.props.loggedCountryName)
+                // }, 0);
+                // setTimeout(() => {
+                //     CountrySummarySingleLineChart.singleLineChart(result.data, 'Deaths', 'cov_4', this.props.loggedCountryName)
+                // }, 0);
+                // setTimeout(() => {
+                //     CountrySummarySingleLineChart.singleLineChart(result.data, 'Confirmed', 'cov_5', this.props.loggedCountryName)
+                // }, 0);
 
             }).catch((err) => {
 
@@ -77,7 +81,6 @@ export default class SummaryWithLineChartComponent extends Component {
             [country]: event.target.value,
             showLoader: true
         }, () => {
-            console.log(this.state)
             this.creatingMultiChartWithDataCapturing()
         })
     }
@@ -136,29 +139,19 @@ export default class SummaryWithLineChartComponent extends Component {
                         </header>
                         <small className="smll_hdr">*Quick review over covid history of your country</small>
                         <Grid container spacing={2}>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <div className="nd_sm">
+                                    <div className="trackerTitle">Track all Events</div>
                                     <div id="cov_2"></div>
                                 </div>
                             </Grid>
-                            <Grid item xs={6}>
+                            {/* <Grid item xs={6}>
                                 <div className="nd_sm">
                                     <div id="cov_3"></div>
                                 </div>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
-                        <Grid container spacing={2} style={{ marginTop: 10 }}>
-                            <Grid item xs={6}>
-                                <div className="nd_sm">
-                                    <div id="cov_4"></div>
-                                </div>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <div className="nd_sm">
-                                    <div id="cov_5"></div>
-                                </div>
-                            </Grid>
-                        </Grid>
+
                         <header className="mie_title">
                             Now Let's Compare this pandemic
                         </header>
@@ -184,12 +177,13 @@ export default class SummaryWithLineChartComponent extends Component {
                                 </select>
                             </div>
                             <select className="input_ser" value={eventType} onChange={this.changingCountryHandler.bind(this, 'eventType')}>
+                                <option key={'Active'} value={'Active'}>Active</option>
                                 <option key={'Confirmed'} value={'Confirmed'}>Confirmed</option>
                                 <option key={'Deaths'} value={'Deaths'}>Deaths</option>
                                 <option key={'Recovered'} value={'Recovered'}>Recovered</option>
                             </select>
 
-                            <div style={{height: 50}}>
+                            <div style={{ height: 50 }}>
                                 {showLoader &&
                                     <img src="loader.gif"></img>}
                             </div>

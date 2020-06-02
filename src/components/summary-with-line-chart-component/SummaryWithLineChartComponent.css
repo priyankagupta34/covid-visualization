@@ -56,3 +56,9 @@ option {
 #cov_6 {
     margin-top: 40px;
 }
+
+.trackerTitle{
+    margin-bottom: 21px;
+    color: white;
+    /* font-size: ; */
+}

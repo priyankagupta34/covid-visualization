@@ -25,7 +25,8 @@ code {
 .centered {
   text-align: center;
 }
-.flexCentered{
+
+.flexCentered {
   display: flex;
   justify-content: center;
 }
@@ -50,7 +51,8 @@ code {
 }
 
 
-.tooltip, .tooltip_1 {
+.tooltip,
+.tooltip_1 {
   min-width: 117px;
   min-height: 100px;
   background: #f0f8ffd1;
@@ -63,11 +65,19 @@ code {
   box-shadow: 0 0 6px #4169e159;
 }
 
-.tooltip_1{
+.tooltip_1 {
   min-height: 20px;
 }
 
 
-.MuiOutlinedInput-notchedOutline{
+.MuiOutlinedInput-notchedOutline {
   border-color: aliceblue;
+}
+
+line {
+  stroke: #f0f8ff61;
+}
+
+.legend1 {
+  font-size: small;
 }

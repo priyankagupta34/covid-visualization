@@ -14,11 +14,17 @@ svg {
     text-align: center;
     background: #333232;
     padding-bottom: 140px;
-    box-shadow: inset 0 0 9px white;
+    box-shadow: inset 0 0 20px 6px #ffffff47;
     border-radius: 10px;
     margin-top: 10px;
 }
 
-#cov_1{
+#cov_1 {
     margin-top: 30px;
+}
+
+.grid {
+    /* stroke: lightgrey; */
+    /* stroke-opacity: 0.7; */
+    shape-rendering: auto;
 }

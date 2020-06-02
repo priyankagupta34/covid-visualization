@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import HeaderComponent from './components/header-component/HeaderComponent';
 import DisplayTotalCountComponent from './components/display-total-count-component/DisplayTotalCountComponent';
 import MapDisplayComponent from './components/map-display-component/MapDisplayComponent';
+import FooterComponent from './components/footer-component/FooterComponent';
 
 export default class App extends Component {
 
@@ -14,6 +15,7 @@ export default class App extends Component {
     this.state = {
       summaryDataCountries: [],
       loggedCountryName: '',
+      loggedCountryCode: '',
       totals: '',
       countryList: []
     }
@@ -24,7 +26,8 @@ export default class App extends Component {
       .then((result) => {
         this.setState({
           ...this.state,
-          loggedCountryName: result.data.country_name
+          loggedCountryName: result.data.country_name,
+          loggedCountryCode: result.data.country_code
         })
       }).catch((err) => {
 
@@ -52,18 +55,23 @@ export default class App extends Component {
   }
 
   render() {
-    const { summaryDataCountries, loggedCountryName, totals, countryList } = this.state;
+    const { summaryDataCountries, loggedCountryName, loggedCountryCode, totals, countryList } = this.state;
     return (
       <div className="art_ap">
         <HeaderComponent loggedCountryName={loggedCountryName} />
         <DisplayTotalCountComponent totals={totals} />
-        <SummaryComponent summaryDataCountries={summaryDataCountries} loggedCountryName={loggedCountryName} />
-        <MapDisplayComponent summaryDataCountries={summaryDataCountries}/>
+        <SummaryComponent summaryDataCountries={summaryDataCountries}
+          loggedCountryName={loggedCountryName}
+
+        />
+        <MapDisplayComponent summaryDataCountries={summaryDataCountries} />
         <SummaryWithLineChartComponent
           summaryDataCountries={summaryDataCountries}
           loggedCountryName={loggedCountryName}
-          countryList={countryList}
+          countryList={countryList}          
+          loggedCountryCode={loggedCountryCode}
         />
+        <FooterComponent />
       </div>
     )
   }

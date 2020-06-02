@@ -30,7 +30,7 @@ export default class MapDisplayComponent extends Component {
 
         CovidServices.listAllLatLongs()
             .then((result) => {
-                console.log('result.data', result.data)
+                // console.log('result.data', result.data)
                 this.setState({
                     ...this.state,
                     listAllLatLongs: result.data.ref_country_codes
@@ -72,13 +72,11 @@ export default class MapDisplayComponent extends Component {
                 }
             }
         }
-        console.log(geojson)
         this.createMap(geojson);
     }
 
 
     createMap(geoClusterPoints) {
-        console.log('geoClusterPoints ', geoClusterPoints)
         // https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}
         /* We are loading the map here whether or not load has loaded */
 
@@ -107,7 +105,6 @@ export default class MapDisplayComponent extends Component {
             onEachFeature: (feature, layer) => {
                 layer.on({
                     'mouseover': (e) => {
-                        console.log('e.latlng.lat ', e.latlng.lat)
                         L.popup()
                             .setLatLng([e.latlng.lat, e.latlng.lng])
                             .setContent(

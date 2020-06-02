@@ -5,7 +5,7 @@ export const CountrySummaryMultiLineChart = {
 }
 
 function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type, id) {
-    console.log('newCountry1Data, newCountry2Data, newCountry3Data ', newCountry1Data, newCountry2Data, newCountry3Data)
+    // console.log('newCountry1Data, newCountry2Data, newCountry3Data ', newCountry1Data, newCountry2Data, newCountry3Data)
     // if(country1Data.data.length !== 0 && country1Data.data.length <= 80){
     //     countrya = country1Data.data.slice(country1Data.data.length - 80);
     // }else{
@@ -54,16 +54,12 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
         .attr('width', width)
         .attr('height', height);
 
-    const transition = d3.transition()
-        .duration(500);
-
-    // const tooltip = d3.select(`#${id}`)
-    //     .append("div")
-    //     .attr('class', 'tooltip_1')
-    //     .style("position", "absolute")
-    //     .style("z-index", "10")
-    //     .style("visibility", "hidden")
-    //     .text("a simple tooltip");
+    const tooltip = d3.select(`#${id}`)
+        .append('div')
+        .attr('class', 'tooltip_1')
+        .style('position', 'absolute')
+        .style('z-index', '10')
+        .style('visibility', 'hidden');
 
 
     let xData = '';
@@ -83,6 +79,7 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
         .domain([0, (dataDisplayLengthForX - 1)]);
     const xAxis = d3.axisBottom(xScale).ticks(dataDisplayLengthForX - 1);
 
+    /* Providing label aat y axis scale */
     if (xData !== '') {
         svg.append('g')
             .style('transform', `translateY(${height}px)`)
@@ -90,24 +87,31 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
             .attr('fill', '#2a5171')
             .selectAll('text')
             .data(xData)
-            .text(d => new Date(d['Date']).toDateString())
+            .text(d => new Date(d['Date']).toLocaleDateString())
             .style('transform', 'rotate(54deg)')
-            .style("text-anchor", "start")
+            .style('text-anchor', 'start')
             .attr('fill', 'wheat')
 
+        /* Defining min val for y axis */
         const minVal = d3.min([d3.min(newCountry1Data, d => d[type]),
         d3.min(newCountry2Data, d => d[type]),
         d3.min(newCountry3Data, d => d[type])]);
+
+        /* Defining max val for y axis */
         const maxVal = d3.max([d3.max(newCountry1Data, d => d[type]),
         d3.max(newCountry2Data, d => d[type]),
         d3.max(newCountry3Data, d => d[type])]);
+
+        /* Defining ranges for y scale */
         const yScale = d3.scaleLinear()
             .range([height, 0])
             .domain([minVal, maxVal]);
 
 
-        const yAxis = d3.axisLeft(yScale).tickFormat(d3.format(""));
+        /* Defining ranges and format for y scale */
+        const yAxis = d3.axisLeft(yScale).tickFormat(d3.format(''));
 
+        /* Providing label aat y axis scale */
         svg.append('g')
             .style('transform', `translateX(0)`)
             .call(yAxis)
@@ -115,91 +119,115 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
             .selectAll('text')
             .attr('fill', 'wheat')
 
-
-
+        /* Generating lines */
         const line = d3.line()
             .x((d, i) => xScale(i))
             .y((d, i) => yScale(d[type]))
-            .curve(d3.curveMonotoneX)
+            .curve(d3.curveMonotoneX);
 
         /* Curve of country 1 */
+        let path1 = '';
         if (newCountry1Data.length !== 0) {
-            svg.append('path')
+            path1 = svg.append('path')
                 .datum(newCountry1Data)
-                .transition(transition)
-                .delay(function (d, i) { return 50 * i; })
+                // .transition(transition)
+                // .delay(function (d, i) { return 50 * i; })
                 .attr('fill', 'none')
-                .attr("stroke", "antiquewhite")
-                .attr("stroke-width", 3)
-
-                .attr("d", line)
+                .attr('stroke', 'antiquewhite')
+                .attr('stroke-width', 3)
+                .attr('d', line)
 
         }
 
         /* Curve of country 2 */
+        let path2 = '';
         if (newCountry2Data.length !== 0) {
-            svg.append('path')
+            path2 = svg.append('path')
                 .datum(newCountry2Data)
-                .transition(transition)
-                .delay(function (d, i) { return 50 * i; })
                 .attr('fill', 'none')
-                .attr("stroke", "yellow")
-                .attr("stroke-width", 3)
-                .attr("d", line)
+                .attr('stroke', 'yellow')
+                .attr('stroke-width', 3)
+                .attr('d', line)
         }
 
         /* Curve of country 3 */
+        let path3 = '';
         if (newCountry3Data.length !== 0) {
-            svg.append('path')
+            path3 = svg.append('path')
                 .datum(newCountry3Data)
-                .transition(transition)
-                .delay(function (d, i) { return 50 * i; })
                 .attr('fill', 'none')
-                .attr("stroke", "orchid")
-                .attr("stroke-width", 3)
-                .attr("d", line)
+                .attr('stroke', 'orchid')
+                .attr('stroke-width', 3)
+                .attr('d', line)
         }
 
-        // const circles = svg.selectAll('circle')
-        //     .data(data)
-        //     .enter()
-        //     .append('circle')
-        //     .attr('cx', (d, i) => xScale(i))
-        //     .attr('cy', d => yScale(d[type]))
-        //     .attr('r', 5)
-        //     .style('fill', 'orange')
-        //     .style('zIndex', 10)
+        const circles1 = svg.selectAll('circle.data1')
+            .data(newCountry1Data)
+            .enter()
+            .append('circle')
+            .attr('cx', (d, i) => xScale(i))
+            .attr('cy', d => yScale(d[type]))
+            .attr('r', 4)
+            .style('fill', 'antiquewhite');
+
+        const circles2 = svg.selectAll('circle.data2')
+            .data(newCountry2Data)
+            .enter()
+            .append('circle')
+            .attr('cx', (d, i) => xScale(i))
+            .attr('cy', d => yScale(d[type]))
+            .attr('r', 4)
+            .style('fill', 'yellow');
+
+        const circles3 = svg.selectAll('circle.data3')
+            .data(newCountry3Data)
+            .enter()
+            .append('circle')
+            .attr('cx', (d, i) => xScale(i))
+            .attr('cy', d => yScale(d[type]))
+            .attr('r', 4)
+            .style('fill', 'orchid');
 
 
 
         /* x Label */
         svg.append('text')
             .text(type)
-            .attr('x', width / 2)
+            .attr('x', (width / 2) - 40)
             .attr('y', height + 100)
             .attr('fill', 'aliceblue')
 
         /* y Label */
         svg.append('text')
             .text('Total Lives')
-            .attr("x", -height + 80)
-            .attr("y", -50)
+            .attr('x', -height + 80)
+            .attr('y', -50)
             .style('transform', 'rotate(-90deg)')
             .style('textAnchor', 'middle')
             .attr('fill', 'aliceblue')
+
 
         /* Legend for country1 */
         if (newCountry1Data.length !== 0) {
             svg.append('circle')
                 .attr('cx', 10)
-                .attr('cy', -15)
+                .attr('cy', -55)
                 .attr('r', 5)
-                .style('fill', 'antiquewhite');
+                .style('fill', 'antiquewhite')
+                .style('cursor', 'pointer');
+
             svg.append('text')
                 .text(newCountry1Data[0].Country)
-                .attr("x", 20)
-                .attr("y", -10)
+                .attr('class', 'legend1')
+                .attr('x', 20)
+                .attr('y', -50)
                 .attr('fill', 'antiquewhite')
+                .on('mouseover', () => (
+                    path1.attr('stroke', 'crimson')
+                ))
+                .on('mouseout', () => (
+                    path1.attr('stroke', 'antiquewhite')
+                ))
         }
 
         /* Legend for country2 */
@@ -208,46 +236,112 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
                 .attr('cx', 10)
                 .attr('cy', -35)
                 .attr('r', 5)
-                .style('fill', 'yellow');
+                .style('fill', 'yellow')
+                .style('cursor', 'pointer');
+
             svg.append('text')
+                .attr('class', 'legend1')
                 .text(newCountry2Data[0].Country)
-                .attr("x", 20)
-                .attr("y", -30)
+                .attr('x', 20)
+                .attr('y', -30)
                 .attr('fill', 'yellow')
+                .on('mouseover', () => (
+                    path2.attr('stroke', 'crimson')
+                ))
+                .on('mouseout', () => (
+                    path2.attr('stroke', 'yellow')
+                ))
         }
 
         /* Legend for country3 */
         if (newCountry3Data.length !== 0) {
             svg.append('circle')
                 .attr('cx', 10)
-                .attr('cy', -55)
+                .attr('cy', -15)
                 .attr('r', 5)
-                .style('fill', 'orchid');
+                .style('fill', 'orchid')
+                .style('cursor', 'pointer');
+
             svg.append('text')
+                .attr('class', 'legend1')
                 .text(newCountry3Data[0].Country)
-                .attr("x", 20)
-                .attr("y", -50)
+                .attr('x', 20)
+                .attr('y', -10)
                 .attr('fill', 'orchid')
+                .on('mouseover', () => (
+                    path3.attr('stroke', 'crimson')
+                ))
+                .on('mouseout', () => (
+                    path3.attr('stroke', 'orchid')
+                ))
         }
 
 
-        // circles.on("mouseover", function (d) {
-        //     return tooltip.style("visibility", "visible").style("top", (d3.event.pageY) + "px")
-        //         .style("left", d3.event.pageX + "px").html(
-        //             `
-        //                         <div>
-        //                             <b>Information</b>
-        //                             <div><small>${type}: ${d[type]}</small></div>
-        //                         </div>
-        //                     `
-        //         );
-        // })
-        // circles.on("mousemove", function () {
-        //     return tooltip.style("top", (d3.event.pageY) + "px")
-        //         .style("left", d3.event.pageX + "px").style("visibility", "visible");
-        // })
-        // circles.on("mouseout", function () {
-        //     return tooltip.style("visibility", "hidden");
-        // });
+
+        /*  gridlines in x axis function */
+        function make_x_gridlines() {
+            return d3.axisBottom(xScale)
+                .ticks(10)
+        }
+
+        /* gridlines in y axis function */
+        function make_y_gridlines() {
+            return d3.axisLeft(yScale)
+                .ticks(10)
+        }
+
+        /* add the X gridlines */
+        svg.append('g')
+            .attr('class', 'grid')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(make_x_gridlines()
+                .tickSize(-height)
+                .tickFormat("")
+            )
+
+        /* add the Y gridlines */
+        svg.append('g')
+            .attr('class', 'grid')
+            .call(make_y_gridlines()
+                .tickSize(-width)
+                .tickFormat("")
+            )
+
+
+        circles1.on('mouseover', function (d) { return mouseover(d) })
+        circles1.on('mousemove', function (d) { return mousemove() })
+        circles1.on('mouseout', function (d) { return mouseout() });
+
+        circles2.on('mouseover', function (d) { return mouseover(d) })
+        circles2.on('mousemove', function (d) { return mousemove() })
+        circles2.on('mouseout', function (d) { return mouseout() });
+
+        circles3.on('mouseover', function (d) { return mouseover(d) })
+        circles3.on('mousemove', function (d) { return mousemove() })
+        circles3.on('mouseout', function (d) { return mouseout() });
+
+        function mouseover(d) {
+
+            return tooltip.style('visibility', 'visible').style('top', (d3.event.pageY) + 'px')
+                .style('left', d3.event.pageX + 'px').html(
+                    `
+                                <div>
+                                    <b>${d.Country}</b>
+                                    <div><small>${type}: ${d[type]}</small></div>
+                                </div>
+                            `
+                );
+
+        }
+
+
+        function mousemove() {
+            return tooltip.style('top', (d3.event.pageY) + 'px')
+                .style('left', d3.event.pageX + 'px').style('visibility', 'visible');
+        }
+
+        function mouseout() {
+            return tooltip.style('visibility', 'hidden');
+        }
     }
 }

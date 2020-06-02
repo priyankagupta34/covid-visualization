@@ -78,7 +78,9 @@ export default class SummaryComponent extends Component {
         const bars = svg.selectAll('rect')
             .data(newDataSet)
             .enter()
-            .append('rect')
+            .append('rect');
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         /* Display rectangle bars here */
         bars.transition(transition)
@@ -87,7 +89,7 @@ export default class SummaryComponent extends Component {
             .attr('y', (d, i) => yScale(d[type]))
             .attr('width', 10)
             .attr('height', (d, i) => height - yScale(d[type]))
-            .attr('fill', 'steelblue')
+            .attr('fill', (d,i)=>color(i))
             .attr('rx', 3)
 
 
@@ -101,6 +103,34 @@ export default class SummaryComponent extends Component {
             .attr('dx', (d, i) => xScale(i))
             .attr('dy', (d, i) => yScale(d[type]) - 10)
             .style('fill', 'wheat')
+
+        /*  gridlines in x axis function */
+        function make_x_gridlines() {		
+            return d3.axisBottom(xScale)
+                .ticks(10)
+        }
+
+        /* gridlines in y axis function */
+        function make_y_gridlines() {		
+            return d3.axisLeft(yScale)
+                .ticks(10)
+        }
+
+        /* add the X gridlines */
+        svg.append("g")			
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + height + ")")        
+        .call(make_x_gridlines()
+            .tickSize(-height)
+        )
+
+        /* add the Y gridlines */
+        svg.append("g")			
+        .attr("class", "grid")
+        .call(make_y_gridlines()
+            .tickSize(-width)
+        )
+
 
 
         /* Adding y axis with formating data over */

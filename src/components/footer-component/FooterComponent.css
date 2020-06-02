@@ -1,0 +1,18 @@
+.ft_gh{
+    background: #333232;
+    margin-top: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    font-size: small;
+    box-shadow: inset 1px 7px 11px #ffffff42;
+    position: relative;
+    line-height: 36px;
+
+}
+
+.ft_gh a{
+    color: white;
+}
