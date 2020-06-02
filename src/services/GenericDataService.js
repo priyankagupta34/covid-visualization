@@ -21,7 +21,5 @@ function countryPopulation(country){
                     }
                 })
             })
-        // localStorage.setItem('kl', countries)
-        console.log('countries ', JSON.stringify(countries));
     })
 }

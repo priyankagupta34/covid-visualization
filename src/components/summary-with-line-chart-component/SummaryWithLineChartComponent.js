@@ -56,7 +56,7 @@ export default class SummaryWithLineChartComponent extends Component {
         CovidServices.countryWiseData(country)
             .then((result) => {
                 CountryEveryEventSummaryMultiLineChart.vividMultiLineChart('cov_2', result.data);
-                CountrySummaryPieChart.vividPieChart(result.data[result.data.length-1],CovidServices.getCountryPopulation(this.props.loggedCountryCode),'cov_3');
+                CountrySummaryPieChart.vividPieChart(result.data[result.data.length - 1], CovidServices.getCountryPopulation(this.props.loggedCountryCode), 'cov_3');
                 // setTimeout(() => {
                 //     CountrySummarySingleLineChart.singleLineChart(result.data, 'Recovered', 'cov_2', this.props.loggedCountryName)
                 // }, 0);
@@ -96,19 +96,22 @@ export default class SummaryWithLineChartComponent extends Component {
                 let countryc = [];
                 if (result[0].data.length !== 0 && result[0].data.length >= 50) {
                     countrya = result[0].data.slice(result[0].data.length - 50);
-                } else {
-                    countrya = result[0].data
                 }
+                //  else {
+                //     countrya = result[0].data
+                // }
                 if (result[1].data.length !== 0 && result[1].data.length >= 50) {
                     countryb = result[1].data.slice(result[1].data.length - 50);
-                } else {
-                    countryb = result[1].data
                 }
+                // else {
+                //     countryb = result[1].data
+                // }
                 if (result[2].data.length !== 0 && result[2].data.length >= 50) {
                     countryc = result[2].data.slice(result[2].data.length - 50);
-                } else {
-                    countryc = result[2].data
                 }
+                // else {
+                //     countryc = result[2].data
+                // }
                 CountrySummaryMultiLineChart.multiLineChart(
                     countrya,
                     countryb,

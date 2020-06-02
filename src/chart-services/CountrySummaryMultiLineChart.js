@@ -5,7 +5,7 @@ export const CountrySummaryMultiLineChart = {
 }
 
 function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type, id) {
-    // console.log('newCountry1Data, newCountry2Data, newCountry3Data ', newCountry1Data, newCountry2Data, newCountry3Data)
+    console.log('newCountry1Data, newCountry2Data, newCountry3Data ', newCountry1Data, newCountry2Data, newCountry3Data)
     // if(country1Data.data.length !== 0 && country1Data.data.length <= 80){
     //     countrya = country1Data.data.slice(country1Data.data.length - 80);
     // }else{
