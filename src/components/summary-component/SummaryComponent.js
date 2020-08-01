@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { CovidServices } from '../../services/CovidServices'
-import { LimitServices } from '../../services/LimitServices'
+import { Tooltip } from '@material-ui/core'
 import * as d3 from 'd3'
+import React, { Component } from 'react'
+import { LimitServices } from '../../services/LimitServices'
 import './SummaryComponent.css'
-import { Tooltip } from '@material-ui/core';
 
 export default class SummaryComponent extends Component {
 

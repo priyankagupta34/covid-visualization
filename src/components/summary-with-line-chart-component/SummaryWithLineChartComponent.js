@@ -1,11 +1,10 @@
 import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
-import { CountrySummaryMultiLineChart } from '../../chart-services/CountrySummaryMultiLineChart';
-import { CountrySummarySingleLineChart } from '../../chart-services/CountrySummarySingleLineChart';
 import { CountryEveryEventSummaryMultiLineChart } from '../../chart-services/CountryEveryEventSummaryMultiLineChart';
+import { CountrySummaryMultiLineChart } from '../../chart-services/CountrySummaryMultiLineChart';
+import { CountrySummaryPieChart } from '../../chart-services/CountrySummaryPieChart';
 import { CovidServices } from '../../services/CovidServices';
 import './SummaryWithLineChartComponent.css';
-import { CountrySummaryPieChart } from '../../chart-services/CountrySummaryPieChart';
 
 export default class SummaryWithLineChartComponent extends Component {
 
@@ -188,7 +187,7 @@ export default class SummaryWithLineChartComponent extends Component {
 
                             <div style={{ height: 50 }}>
                                 {showLoader &&
-                                    <img src="loader.gif"></img>}
+                                    <img src="loader.gif" alt="loader"></img>}
                             </div>
 
                             <div id="cov_6"></div>

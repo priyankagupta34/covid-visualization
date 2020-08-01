@@ -1,11 +1,13 @@
-import * as d3 from 'd3'
+import * as d3 from 'd3';
 
 export const CountryEveryEventSummaryMultiLineChart = {
     vividMultiLineChart
 }
 
 function vividMultiLineChart(id, data) {
-    let newData = [], activeData = [], confimedData = [], deathData = [], strokeData = 10;
+    let newData = [],  strokeData = 10;
+    //  activeData = [], confimedData = [], deathData = []
+    
     const colorRecov = '#62b80d', colorActive = 'yellow', colorConfirmed = 'lightblue', colorDeath = 'crimson';
     for (let i = 0; i < data.length - 1; i++) {
         if (i % strokeData === 0) {
