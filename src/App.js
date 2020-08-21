@@ -59,7 +59,7 @@ export default class App extends Component {
     const { summaryDataCountries, loggedCountryName, loggedCountryCode, totals, countryList } = this.state;
     return (
       <>
-        <div className="compatibility_mobile">
+        {/* <div className="compatibility_mobile"> */}
           <div className="art_ap">
             <HeaderComponent loggedCountryName={loggedCountryName} />
             <DisplayTotalCountComponent totals={totals} />
@@ -76,14 +76,14 @@ export default class App extends Component {
             />
             <FooterComponent />
           </div>
-        </div>
+        {/* </div> */}
 
-        <div className="no_compatibility_mobile">
+        {/* <div className="no_compatibility_mobile">
           <div className="no_compat">
             <div>This site is designed specifically for a desktop</div>
-            {/* <a href="https://covid-visualization-live.netlify.app/" >covid-visualization</a> */}
+            <a href="https://covid-visualization-live.netlify.app/" >covid-visualization</a>
           </div>
-        </div>
+        </div> */}
       </>
     )
   }

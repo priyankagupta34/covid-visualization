@@ -45,7 +45,8 @@ export default class SummaryComponent extends Component {
         }
         d3.selectAll("#cov_1 > *").remove();
         const height = 300;
-        const width = 1300;
+        const width = 300;
+        // const width = 1300;
 
         newDataSet = newDataSet.slice(0, slice);
         let tooltip = d3.select("#cov_1")
@@ -71,7 +72,9 @@ export default class SummaryComponent extends Component {
         const svg = d3.select("#cov_1")
             .append('svg')
             .attr('width', width)
-            .attr('height', height);
+            .attr('height', height)
+            .attr('preserveAspectRatio', "xMidYMid meet")
+            .attr('pointer-events', "auto")
 
         /* Creating rectangle bars here */
         const bars = svg.selectAll('rect')
@@ -101,7 +104,7 @@ export default class SummaryComponent extends Component {
             .text(d => `${LimitServices.abbreviateIntToReadableString(d[type])}`)
             .attr('dx', (d, i) => xScale(i))
             .attr('dy', (d, i) => yScale(d[type]) - 10)
-            .style('fill', 'wheat')
+            .style('fill', 'wheat');
 
         /*  gridlines in x axis function */
         function make_x_gridlines() {		

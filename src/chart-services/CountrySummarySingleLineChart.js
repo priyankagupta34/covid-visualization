@@ -30,7 +30,9 @@ function singleLineChart(data, type, id, loggedCountryName) {
     const svg = d3.select(`#${id}`)
         .append('svg')
         .attr('width', width)
-        .attr('height', height);
+        .attr('height', height)        
+        .attr('preserveAspectRatio', "xMidYMid meet")
+        .attr('pointer-events', "auto")
 
     const tooltip = d3.select(`#${id}`)
         .append("div")

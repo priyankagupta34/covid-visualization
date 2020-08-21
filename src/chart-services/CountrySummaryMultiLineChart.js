@@ -48,11 +48,14 @@ function multiLineChart(newCountry1Data, newCountry2Data, newCountry3Data, type,
 
 
     const height = 300;
-    const width = 1300;
+    // const width = 1300;
+    const width = 300;
     const svg = d3.select(`#${id}`)
         .append('svg')
         .attr('width', width)
-        .attr('height', height);
+        .attr('height', height)        
+        .attr('preserveAspectRatio', "xMidYMid meet")
+        .attr('pointer-events', "auto")
 
     const tooltip = d3.select(`#${id}`)
         .append('div')

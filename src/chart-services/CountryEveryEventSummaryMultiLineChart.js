@@ -34,12 +34,14 @@ function vividMultiLineChart(id, data) {
 
     d3.selectAll(`#${id} > *`).remove();
     const height = 300;
-    const width = 1250;
-    // const width = 500;
+    // const width = 1250;
+    const width = 300;
     const svg = d3.select(`#${id}`)
         .append('svg')
         .attr('width', width)
-        .attr('height', height);
+        .attr('height', height)        
+        .attr('preserveAspectRatio', "xMidYMid meet")
+        .attr('pointer-events', "auto")
 
     /* Defining ranges for y scale */
     const yScale = d3.scaleLinear()
